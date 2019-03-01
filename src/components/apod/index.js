@@ -1,14 +1,12 @@
 import {connect} from 'react-redux';
-import {AstronomyPictureDay} from './AstronomyPictureDay'
+import {AstronomyPictureDay} from './AstronomyPictureDay';
+import {getAstronomyPictureDay} from '../../selectors';
+
+import Logger from 'js-logger'
 
 const mapStateToProps = state =>
 {
-	const date = '';
-	const title = 'title';
-	const explanation = 'to explain tings';
-	const url = 'url';
-
-	return {date,title,explanation,url};
+	return getAstronomyPictureDay(state);
 }
 
 const mapDispatchToProps = dispatch =>{
