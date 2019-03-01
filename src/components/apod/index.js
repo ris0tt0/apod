@@ -9,12 +9,6 @@ const mapStateToProps = state =>
 	return getAstronomyPictureDay(state);
 }
 
-const mapDispatchToProps = dispatch =>{
-	return {
-		// onLegDetails:() => 'leg details',
-	};
-}
-
-const APODContainer = connect(mapStateToProps,mapDispatchToProps)(AstronomyPictureDay);
+const APODContainer = connect(mapStateToProps)(AstronomyPictureDay);
 
 export default APODContainer;
