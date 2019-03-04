@@ -1,4 +1,7 @@
 import {combineReducers} from 'redux';
+import Logger from 'js-logger';
+import { SET_DATE, RECIEVE_APOD } from '../actions/ActionTypes';
+
 // {
 // 	"date":"2019-02-28",
 // 	"explanation":"On January 1, New Horizons swooped to within 3,500 kilometers of the Kuiper Belt world known as Ultima Thule. That's about 3 times closer than its July 2015 closest approach to Pluto. The spacecraft's unprecedented feat of navigational precision, supported by data from ground and space-based observing campaigns, was accomplished 6.6 billion kilometers (over 6 light-hours) from planet Earth. Six and a half minutes before closest approach to Ultima Thule it captured the nine frames used in this composite image. The most detailed picture possible of the farthest object ever explored, the image has a resolution of about 33 meters per pixel, revealing intriguing bright surface features and dark shadows near the terminator. A primitive Solar System object, Ultima Thule's two lobes combine to span just 30 kilometers. The larger lobe, referred to as Ultima, is recently understood to be flattened like a fluffy pancake, while the smaller, Thule, has a shape that resembles a dented walnut.",
@@ -23,13 +26,29 @@ function apod(state = initialApod,action)
 {
 	switch(action.type)
 	{
-		case 'onapod':
-			break;
+		case RECIEVE_APOD:
+			return {...action.payload};
 		default:
 			return {...state};
 	}
 }
 
-const gapod = combineReducers({apod});
+const initialDate = new Date();
+function selectedDate(state = initialDate,action)
+{
+	switch(action.type)
+	{
+		case SET_DATE:
+			return new Date(action.date);
+		default:
+			return state;
+	}
+}
+
+const gapod = combineReducers(
+	{
+		apod,
+		selectedDate,
+	});
 
 export default gapod;
