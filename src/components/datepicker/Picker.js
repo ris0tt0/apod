@@ -7,7 +7,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 function Picker({date,onChange}) {
 	return (
 		<div>
-			<DatePicker
+			<span>Please select a date: </span><DatePicker
 				selected={date}
 				onChange={onChange}
 				maxDate={new Date()}
