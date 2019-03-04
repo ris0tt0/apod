@@ -6,8 +6,11 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import Logger from 'js-logger';
 import store from './store';
+import { fetchAPOD } from './actions';
 
 Logger.useDefaults();
+
+store.dispatch(fetchAPOD());
 
 ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
 

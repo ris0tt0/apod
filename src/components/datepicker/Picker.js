@@ -4,16 +4,13 @@ import PropTypes from 'prop-types';
 
 import 'react-datepicker/dist/react-datepicker.css';
 
-
-import Logger from 'js-logger';
-
 function Picker({date,onChange}) {
-	Logger.info(date);
 	return (
 		<div>
 			<DatePicker
 				selected={date}
 				onChange={onChange}
+				maxDate={new Date()}
 			/>
 		</div>
 	)

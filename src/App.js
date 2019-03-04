@@ -4,7 +4,6 @@ import Picker from './components/datepicker';
 
 import './App.css';
 
-
 class App extends Component {
 	render() {
 		return (
