@@ -13,6 +13,7 @@ import { SET_DATE, RECIEVE_APOD } from '../actions/ActionTypes';
 // }
 
 const initialApod = {
+	copyright:'',
 	date:'',
 	explanation:'',
 	hdurl:'',

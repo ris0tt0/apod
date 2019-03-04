@@ -1,15 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types'
-
 import Logger from 'js-logger';
 
-function AstronomyPictureDay({date,title,explanation,url}) {
+function AstronomyPictureDay({date,copyright,title,explanation,url}) {
+	const cr = copyright ? <span>Copyright: {copyright}</span> : '';
 	return (
 		<div className='APOD'>
 			<span>{date}</span>
-			<span>{title}</span>
+			<br />
+			<img src={url} alt='hello world'/>
+			<br />
+			{cr}
+			<span><h1>{title}</h1></span>
+			<br />
 			<span>{explanation}</span>
-			<span>{url}</span>
+			<br />
+			
 		</div>
 	)
 }
@@ -19,7 +25,7 @@ AstronomyPictureDay.propTypes = {
 	title:PropTypes.string.isRequired,
 	explanation:PropTypes.string.isRequired,
 	url:PropTypes.string.isRequired,
+	copyright:PropTypes.string,
 }
 
 export { AstronomyPictureDay }
-
