@@ -3,6 +3,7 @@ import Logger from 'js-logger';
 
 const getAPODSelector = state => state.apod;
 const getSelectedDateSelector = state => state.selectedDate;
+const getIsRequestingSelector = state => state.isRequsting;
 
 export const getAstronomyPictureDay = createSelector(
 	[getAPODSelector,getSelectedDateSelector],
@@ -16,3 +17,9 @@ export const getAstronomyPictureDay = createSelector(
 export const getSelectedDate = createSelector(
 	[getSelectedDateSelector],
 	selectedDate => selectedDate);
+
+export const getIsRequesting = createSelector(
+	[getIsRequestingSelector],
+	isRequesting => isRequesting
+);
+

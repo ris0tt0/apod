@@ -4,7 +4,9 @@ import PropTypes from 'prop-types';
 
 import 'react-datepicker/dist/react-datepicker.css';
 
-function Picker({date,onChange}) {
+function Picker({date,isRequesting,onChange}) {
+	if( isRequesting) return <div>loading....</div>;
+	
 	return (
 		<div>
 			<span>Please select a date: </span><DatePicker
@@ -17,6 +19,7 @@ function Picker({date,onChange}) {
 }
 
 Picker.propTypes = {
+	isRequesting:Boolean,
 	date:PropTypes.instanceOf(Date),
 	onChange:PropTypes.func.isRequired,
 }

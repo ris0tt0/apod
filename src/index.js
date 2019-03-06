@@ -1,14 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux'
-import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import Logger from 'js-logger';
 import store from './store';
 import { fetchAPOD } from './actions';
+import './index.css';
 
-Logger.useDefaults();
+if(process.env.REACT_APP_LOGGER === 'debug') Logger.useDefaults();
 
 store.dispatch(fetchAPOD());
 

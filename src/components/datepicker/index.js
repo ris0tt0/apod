@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import {Picker} from './Picker'
-import {getSelectedDate} from '../../selectors';
+import {getSelectedDate, getIsRequesting} from '../../selectors';
 
 import Logger from 'js-logger'
 import { setNewDate, fetchAPOD } from '../../actions';
@@ -8,7 +8,9 @@ import { setNewDate, fetchAPOD } from '../../actions';
 const mapStateToProps = state =>
 {
 	const date = getSelectedDate(state);
-	return {date};
+	const isRequesting = getIsRequesting(state);
+
+	return {date,isRequesting};
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {

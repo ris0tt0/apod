@@ -1,13 +1,18 @@
-import {RECIEVE_APOD, SET_DATE} from './ActionTypes';
+import {RECIEVE_APOD, SET_DATE, REQUEST_APOD} from './ActionTypes';
 import Logger from 'js-logger'
 
 export const recieveAPOD = date => ({type:RECIEVE_APOD,payload:date});
+export const requestAPOD = isRequesting => ({type:REQUEST_APOD, payload:isRequesting});
 
 export function fetchAPOD()
 {
 	return (dispatch,getState) =>
 	{
-		const api_key = 'DEMO_KEY';
+		dispatch(requestAPOD(true));
+		/**
+		 * TODO should create a config method that handles this logic?
+		 */
+		const api_key = process.env.REACT_APP_NASA_API ? process.env.REACT_APP_NASA_API : 'DEMO_KEY';
 		const date = getState().selectedDate;
 
 		//formate the date as required by nasa api.
@@ -19,7 +24,10 @@ export function fetchAPOD()
 
 		return fetch(`https://api.nasa.gov/planetary/apod?date=${nasaDate}&api_key=${api_key}`)
 		.then( response => response.json() )
-		.then( json => dispatch(recieveAPOD(json)));
+		.then( json => {
+			dispatch(recieveAPOD(json));
+			dispatch(requestAPOD(false));
+		});
 	}
 }
 

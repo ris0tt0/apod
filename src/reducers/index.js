@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux';
 import Logger from 'js-logger';
-import { SET_DATE, RECIEVE_APOD } from '../actions/ActionTypes';
+import { SET_DATE, RECIEVE_APOD, REQUEST_APOD } from '../actions/ActionTypes';
 
 // {
 // 	"date":"2019-02-28",
@@ -46,9 +46,22 @@ function selectedDate(state = initialDate,action)
 	}
 }
 
+function isRequsting(state = true, action)
+{
+	switch(action.type)
+	{
+		case REQUEST_APOD:
+			return action.payload;
+		default:
+			return state;
+	}
+}
+
+
 const gapod = combineReducers(
 	{
 		apod,
+		isRequsting,
 		selectedDate,
 	});
 
