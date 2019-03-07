@@ -1,14 +1,19 @@
 import React from 'react';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
+import YouTube from 'react-youtube';
+
 import Logger from 'js-logger';
 
+/**
+ * returns the youtube video id.
+ */
 function getID(url)
 {
-	var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
-	var match = url.match(regExp);
+	const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
+	const match = url.match(regExp);
 
-	if (match && match[2].length == 11) {
-		return match[2];
+	if (match && match[7].length === 11) {
+		return match[7];
 	} else {
 		return false;
 	}
@@ -16,15 +21,34 @@ function getID(url)
 
 function AstronomyPictureDay({date,media_type,copyright,title,explanation,url,isRequesting})
 {
-	if( isRequesting) return <div>Loading</div>;
-	
-	// if( media_type === 'video')
+	if( isRequesting) return <div></div>;
+
+	const isYouTube = media_type === 'video';
+	let id, opts;
+	if( isYouTube)
+	{
+		id = getID(url);
+		opts = {
+      height: '390',
+      width: '640',
+      playerVars: { // https://developers.google.com/youtube/player_parameters
+        autoplay: 1
+      }
+		};
+	}
+
 	const cr = copyright ? <span><h3>Copyright:</h3> {copyright}</span> : '';
+	// determine media type.
+	const media = isYouTube ?
+		<YouTube videoId={id} opts={opts} onReady={event => event} />
+		: 
+		<img src={url} alt=''/>;
+
 	return (
 		<div className='APOD'>
 			<span>{date}</span>
 			<br />
-			<img src={url} alt=''/>
+			{media}
 			<br />
 			{cr}
 			<span><h1>{title}</h1></span>
@@ -34,15 +58,6 @@ function AstronomyPictureDay({date,media_type,copyright,title,explanation,url,is
 		</div>
 	)
 }
-/**
- * <iframe 
- * 	width="806" 
- * 	height="453" 
- * 	src="https://www.youtube.com/embed/lJIrF4YjHfQ" 
- * 	frameborder="0" 
- * 	allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
- * </iframe>
- */
 
 AstronomyPictureDay.propTypes = {
 	date:PropTypes.string.isRequired,
