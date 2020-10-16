@@ -11,7 +11,6 @@ Logger.useDefaults();
 
 store.dispatch(setMyCounter(0xf));
 store.dispatch(sayMyNameDelay('jay',2000));
-Logger.info('asdfasf');
 
 ReactDOM.render(
 	<Provider store={store} >
