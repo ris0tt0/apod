@@ -1,14 +1,13 @@
-import { makeStyles } from '@material-ui/core/styles';
 import { CircularProgress, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import { KeyboardDatePicker } from '@material-ui/pickers';
 import Logger from 'js-logger';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { requestAPOD } from '../actions/nasa';
-import { apodIsRequestionSelector, apodCurrentResultsSelector, apodCurrentIdSelector } from '../selectors/nasa';
-import {KeyboardDatePicker,
-} from '@material-ui/pickers';
-
 import YouTube from 'react-youtube';
+import { requestAPOD } from '../actions/nasa';
+import { apodCurrentResultsSelector, apodIsRequestionSelector } from '../selectors/nasa';
+
 
 const useStyles = makeStyles(theme=>({
 	app:{
