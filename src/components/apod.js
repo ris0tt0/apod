@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme=>({
 	},
 	copyright:{
 		alignSelf:'flex-end',
-		paddingRight:20,
+		paddingRight:10,
 	},
 	container:{
 		display:'flex',
@@ -76,11 +76,12 @@ const AstroPictureDay = props => {
 			<Typography variant='h3' component='p'>{result.title}</Typography>
 			<KeyboardDatePicker
 				disableToolbar
+				maxDate={new Date()}
+				autoOk={true}
 				variant="inline"
 				format="MM/dd/yyyy"
 				margin="normal"
 				id="date-picker-inline"
-				label="Date picker inline"
 				value={selectedDate}
 				onChange={handleDateChange}
 				KeyboardButtonProps={{
