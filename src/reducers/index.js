@@ -4,7 +4,7 @@ import { combineReducers } from 'redux';
 import { SET_MY_COUNTER, SET_MY_NAME } from '../actions';
 import { SET_APOD, SET_REQUESTING_APOD, SET_REQUESTING_APOD_ERROR } from '../actions/nasa';
 
-function apod(state = {apod:{},current:'',isRequesting:true},action){
+function apod(state = {results:{},current:'',isRequesting:true},action){
 	switch(action.type){
 		case SET_APOD:
 			return merge({},state,action.payload);

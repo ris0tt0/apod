@@ -13,9 +13,9 @@ export const setRequestingAPODError = payload => ({type:SET_REQUESTING_APOD_ERRO
 
 export const requestAPOD = (date) => (dispatch,getState,{nasa_api_key}) => {
 	const nasaDate = formatNasaDate(date);
-	const state = getState();
+	const {apod} = getState();
 
-	if(state.apod.apod.hasOwnProperty(nasaDate)){
+	if(apod.results.hasOwnProperty(nasaDate)){
 		return dispatch(setAPOD({current:nasaDate}));
 	}
 

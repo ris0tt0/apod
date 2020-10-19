@@ -29,13 +29,12 @@ const AstroPictureDay = props => {
 
 	useEffect(()=>{
 		async function delay(){
-			dispatch(requestAPOD());
+			await dispatch(requestAPOD());
 		};
 
 		delay();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	},[]);
-
 
 	const handleDateChange = (date) => {
 		setSelectedDate(date);
@@ -49,8 +48,6 @@ const AstroPictureDay = props => {
 			</div>
 		);
 	}
-
-	Logger.info(result);
 
 	if(!result){
 		return(
