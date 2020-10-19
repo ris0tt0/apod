@@ -4,7 +4,7 @@ import Logger from 'js-logger';
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { requestAPOD } from '../actions/nasa';
-import { apodIsRequestionSelector, apodCurrentResultsSelector } from '../selectors/nasa';
+import { apodIsRequestionSelector, apodCurrentResultsSelector, apodCurrentIdSelector } from '../selectors/nasa';
 import {KeyboardDatePicker,
 } from '@material-ui/pickers';
 
@@ -17,6 +17,17 @@ const useStyles = makeStyles(theme=>({
 		flexDirection:'column',
 		margin:0,
 	},
+	copyright:{
+		alignSelf:'flex-end',
+		paddingRight:20,
+	},
+	container:{
+		display:'flex',
+		justifyContent:"center",
+		alignItems:'center',
+		flexDirection:'column',
+		maxWidth:900,
+	}
 }))
 
 const AstroPictureDay = props => {
@@ -26,6 +37,7 @@ const AstroPictureDay = props => {
 	const dispatch = useDispatch();
 	const isRequesting = useSelector(apodIsRequestionSelector);
 	const result = useSelector(apodCurrentResultsSelector);
+	const current = useSelector(apodCurrentIdSelector);
 
 	useEffect(()=>{
 		async function delay(){
@@ -40,6 +52,8 @@ const AstroPictureDay = props => {
 		setSelectedDate(date);
 		dispatch(requestAPOD(date));
 	};
+
+	Logger.info(current);
 
 	if(isRequesting){
 		return(
@@ -60,7 +74,6 @@ const AstroPictureDay = props => {
 	return (
 		<Typography className={classes.app} component='div' variant='body2' >
 			<Typography variant='h3' component='p'>{result.title}</Typography>
-			<p>{result.date}</p>
 			<KeyboardDatePicker
 				disableToolbar
 				variant="inline"
@@ -74,9 +87,13 @@ const AstroPictureDay = props => {
 					'aria-label': 'change date',
 				}}
         />
-			<p>{result.copyright}</p>
 			<img src={result.url} alt=""/>
-			<p>{result.explanation}</p>
+			<Typography variant='caption' component='p' className={classes.copyright}>
+				{result.copyright}
+			</Typography>
+			<div className={classes.container}>
+				<p>{result.explanation}</p>
+			</div>
 		</Typography>
 	);
 };
