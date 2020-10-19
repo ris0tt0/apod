@@ -67,7 +67,6 @@ const AstroPictureDay = props => {
 	const dispatch = useDispatch();
 	const isRequesting = useSelector(apodIsRequestionSelector);
 	const result = useSelector(apodCurrentResultsSelector);
-	const current = useSelector(apodCurrentIdSelector);
 
 	useEffect(()=>{
 		async function delay(){
@@ -99,12 +98,16 @@ const AstroPictureDay = props => {
 		);
 	}
 
+	const minDate = new Date('jun 16, 1996');
+	const maxDate = new Date();
+
 	return (
 		<Typography className={classes.app} component='div' variant='body2' >
 			<Typography variant='h3' component='p'>{result.title}</Typography>
 			<KeyboardDatePicker
+				maxDate={maxDate}
+				minDate={minDate}
 				disableToolbar
-				maxDate={new Date()}
 				autoOk={true}
 				variant="inline"
 				format="MM/dd/yyyy"
