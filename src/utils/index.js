@@ -7,5 +7,5 @@ export const formatNasaDate = (date = null) => {
 	if( date === null){
 		date = new Date();
 	}
-	return `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`;
+	return `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()}`;
 }

@@ -4,8 +4,7 @@ import Logger from 'js-logger';
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { requestAPOD } from '../actions/nasa';
-import { apodIsRequestionSelector, apodResultSelector } from '../selectors/nasa';
-import { waitFor } from '../utils';
+import { apodIsRequestionSelector, apodCurrentResultsSelector } from '../selectors/nasa';
 import {KeyboardDatePicker,
 } from '@material-ui/pickers';
 
@@ -26,7 +25,7 @@ const AstroPictureDay = props => {
 	const classes = useStyles();
 	const dispatch = useDispatch();
 	const isRequesting = useSelector(apodIsRequestionSelector);
-	const result = useSelector(apodResultSelector);
+	const result = useSelector(apodCurrentResultsSelector);
 
 	useEffect(()=>{
 		async function delay(){
@@ -39,13 +38,21 @@ const AstroPictureDay = props => {
 
 
 	const handleDateChange = (date) => {
-		Logger.info(`handleDateChange ${date.toString()}`);
-
 		setSelectedDate(date);
 		dispatch(requestAPOD(date));
 	};
 
 	if(isRequesting){
+		return(
+			<div>
+				<CircularProgress color='secondary' />
+			</div>
+		);
+	}
+
+	Logger.info(result);
+
+	if(!result){
 		return(
 			<div>
 				<CircularProgress color='secondary' />

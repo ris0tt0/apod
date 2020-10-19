@@ -1,3 +1,4 @@
+import Logger from "js-logger";
 import { normzlizeAPOS } from "../normalize/nasa";
 import { formatNasaDate } from '../utils';
 
@@ -10,8 +11,13 @@ export const setAPOD = payload => ({type:SET_APOD,payload});
 export const setRequestingAPOD = payload => ({type:SET_REQUESTING_APOD,payload});
 export const setRequestingAPODError = payload => ({type:SET_REQUESTING_APOD_ERROR,payload});
 
-export const requestAPOD = (date) => (dispatch,_,{nasa_api_key}) => {
+export const requestAPOD = (date) => (dispatch,getState,{nasa_api_key}) => {
 	const nasaDate = formatNasaDate(date);
+	const state = getState();
+
+	if(state.apod.apod.hasOwnProperty(nasaDate)){
+		return dispatch(setAPOD({current:nasaDate}));
+	}
 
 	dispatch(setRequestingAPOD(true));
 
