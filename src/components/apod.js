@@ -8,6 +8,8 @@ import { apodIsRequestionSelector, apodCurrentResultsSelector, apodCurrentIdSele
 import {KeyboardDatePicker,
 } from '@material-ui/pickers';
 
+import YouTube from 'react-youtube';
+
 const useStyles = makeStyles(theme=>({
 	app:{
 		backgroundColor:theme.palette.background.default,
@@ -28,7 +30,35 @@ const useStyles = makeStyles(theme=>({
 		flexDirection:'column',
 		maxWidth:900,
 	}
-}))
+}));
+
+const MediatContainer = ({mediaType,url}) => {
+
+	if(mediaType === 'image'){
+		return (
+			<div>
+				<img src={url} alt=""/>
+			</div>
+		);
+	}
+
+	if(mediaType === 'video'){
+		const opts = {
+			height: '390',
+			width: '640',
+			playerVars: {
+				// https://developers.google.com/youtube/player_parameters
+				autoplay: 1,
+			},
+		};
+
+		const found = url.match(/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/i);
+		
+		return <YouTube videoId={found[1]} opts={opts} />;
+	}
+
+	Logger.error(`unknown mediat type: ${mediaType} url: ${url}`);
+}
 
 const AstroPictureDay = props => {
 
@@ -88,7 +118,7 @@ const AstroPictureDay = props => {
 					'aria-label': 'change date',
 				}}
         />
-			<img src={result.url} alt=""/>
+			<MediatContainer url={result.url} mediaType={result.media_type} />
 			<Typography variant='caption' component='p' className={classes.copyright}>
 				{result.copyright}
 			</Typography>
