@@ -4,15 +4,15 @@ import { combineReducers } from 'redux';
 import { SET_MY_COUNTER, SET_MY_NAME } from '../actions';
 import { SET_APOD, SET_REQUESTING_APOD, SET_REQUESTING_APOD_ERROR } from '../actions/nasa';
 
-function apod(state = {},action){
+function apod(state = {isRequesting:true},action){
 	switch(action.type){
 		case SET_APOD:
-			return merge(state,action.payload);
+			return merge({},state,action.payload);
 		case SET_REQUESTING_APOD:
-			return merge(state,{isRequestion:action.payload});
+			return merge({},state,{isRequesting:action.payload});
 		case SET_REQUESTING_APOD_ERROR:
 			Logger.error(action.payload);
-			return merge(state,{error:action.payload});
+			return merge({},state,{error:action.payload});
 		default:
 			return state;
 	};
