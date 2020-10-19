@@ -83,8 +83,6 @@ const AstroPictureDay = props => {
 		dispatch(requestAPOD(date));
 	};
 
-	Logger.info(current);
-
 	if(isRequesting){
 		return(
 			<div>
