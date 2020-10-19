@@ -17,6 +17,7 @@ const useStyles = makeStyles(theme=>({
 		alignItems:'center',
 		flexDirection:'column',
 		margin:0,
+		padding:20,
 	},
 	copyright:{
 		alignSelf:'flex-end',
