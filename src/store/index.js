@@ -1,15 +1,13 @@
 import { applyMiddleware, createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
-import rootReducer from '../reducers';
+import { rootReducers } from '../reducers';
 
-const nasa_api_key = (process.env.REACT_APP_NASA_OPEN_API) ?
-	process.env.REACT_APP_NASA_OPEN_API :
-	'DEMO_KEY';
+const api_key = process.env.NASA_OPEN_API_KEY ?? 'DEMO_KEY';
 
-const store = createStore(rootReducer,composeWithDevTools(
-	applyMiddleware(
-		thunk.withExtraArgument({nasa_api_key}))
-	));
+const store = createStore(
+  rootReducers,
+  composeWithDevTools(applyMiddleware(thunk.withExtraArgument({ api_key })))
+);
 
-export default store;
+export { store };

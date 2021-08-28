@@ -1,31 +1,21 @@
+import { Box, Paper } from '@material-ui/core';
 import React from 'react';
-import { makeStyles, createStyles } from '@material-ui/core/styles';
-import { MuiPickersUtilsProvider } from '@material-ui/pickers';
-import AstroPictureDay from './components/apod';
-import DateFnsUtils from '@date-io/date-fns';
+import { PageOne } from './pages/one';
 
-const useStyles = makeStyles(theme => createStyles({
-  root: {
-	backgroundColor: theme.palette.backgroundColor,
-	display:'flex',
-	justifyContent:'center',
-	alignItems:'center',
-	minHeight:'100vh',
-	flex:1,
-  },
-}));
+const App = () => {
+  return (
+    <Paper>
+      <Box
+        height="100vh"
+        display="flex"
+        flex={1}
+        justifyContent="center"
+        alignItems="center"
+      >
+        <PageOne />
+      </Box>
+    </Paper>
+  );
+};
 
-function App() {
-	const classes = useStyles();
-
-	return (
-
-		<div className={classes.root}>
-			<MuiPickersUtilsProvider utils={DateFnsUtils}>
-				<AstroPictureDay />
-			</MuiPickersUtilsProvider>
-		</div>
-	);
-}
-
-export default App;
+export { App };
