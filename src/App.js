@@ -1,4 +1,5 @@
-import { Box, Paper } from '@material-ui/core';
+import { Paper } from '@mui/material';
+import { Box } from '@mui/system';
 import React from 'react';
 import { PageOne } from './pages/one';
 

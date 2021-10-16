@@ -1,4 +1,5 @@
-import { Box, Paper, Typography } from '@material-ui/core';
+import { Paper, Typography } from '@mui/material';
+import { Box } from '@mui/system';
 import React from 'react';
 
 export const APOD = ({ explanation, title, media_type, url }) => {

@@ -1,6 +1,6 @@
-import { Box } from '@material-ui/core';
-import { KeyboardDatePicker } from '@material-ui/pickers';
-import 'date-fns';
+import { DesktopDatePicker } from '@mui/lab';
+import { TextField } from '@mui/material';
+import { Box } from '@mui/system';
 import { format } from 'date-fns';
 import Logger from 'js-logger';
 import React from 'react';
@@ -39,16 +39,12 @@ const PageOne = () => {
       alignItems="center"
       flexDirection="column"
     >
-      <KeyboardDatePicker
-        margin="normal"
-        id="date-picker-dialog"
-        label="Date picker dialog"
-        format="MM/dd/yyyy"
+      <DesktopDatePicker
+        label="Date desktop"
+        inputFormat="MM/dd/yyyy"
         value={selectedDate}
         onChange={handleDateChange}
-        KeyboardButtonProps={{
-          'aria-label': 'change date',
-        }}
+        renderInput={(params) => <TextField {...params} />}
       />
       {apodData && <APOD {...apodData} />}
     </Box>

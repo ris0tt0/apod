@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { setCurrentDate } from '.';
 
 export const REQUESTING_APOD = 'requesting apod';
 export const REQUESTING_APOD_ERROR = 'requesting apod error';
