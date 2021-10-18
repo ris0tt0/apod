@@ -8,8 +8,11 @@ import { setName } from './actions';
 import { Provider } from 'react-redux';
 import DateAdapter from '@mui/lab/AdapterDateFns';
 import { LocalizationProvider } from '@mui/lab';
+import { CssBaseline } from '@mui/material';
 
-Logger.useDefaults();
+if (process.env.mode == 'development') {
+  Logger.useDefaults();
+}
 
 store.dispatch(setName('jonathan gee'));
 
@@ -21,6 +24,7 @@ render(
   <Provider store={store}>
     <ThemeProvider theme={theme}>
       <LocalizationProvider dateAdapter={DateAdapter}>
+        <CssBaseline />
         <App />
       </LocalizationProvider>
     </ThemeProvider>

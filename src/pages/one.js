@@ -1,9 +1,8 @@
 import { DesktopDatePicker } from '@mui/lab';
-import { TextField } from '@mui/material';
-import { Box } from '@mui/system';
+import { Stack, TextField } from '@mui/material';
 import { format } from 'date-fns';
 import Logger from 'js-logger';
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCurrentDate } from '../actions';
 import { requestApod } from '../actions/apod';
@@ -22,32 +21,36 @@ const PageOne = () => {
   const selectedDate = useSelector(getCurrentDate);
   const apodData = useSelector(getCurrentApod);
 
-  const handleDateChange = (date) => {
-    Logger.info(date);
-    const newDate = format(date, 'yyyy-MM-dd');
-    dispatch(requestApod(newDate));
-    dispatch(setCurrentDate(date));
-  };
+  const handleDateChange = useCallback(
+    (date) => {
+      Logger.info(date);
+      const newDate = format(date, 'yyyy-MM-dd');
+      dispatch(requestApod(newDate));
+      dispatch(setCurrentDate(date));
+    },
+    [dispatch]
+  );
 
   Logger.info('PageOne:', isRequesting, requestingError, apodData);
 
   return (
-    <Box
-      display="flex"
-      flex={1}
-      justifyContent="center"
-      alignItems="center"
-      flexDirection="column"
+    <Stack
+      sx={{
+        justifyContent: 'center',
+        alignItems: 'center',
+        m: 3,
+      }}
     >
       <DesktopDatePicker
-        label="Date desktop"
+        label="select date"
         inputFormat="MM/dd/yyyy"
         value={selectedDate}
         onChange={handleDateChange}
         renderInput={(params) => <TextField {...params} />}
+        maxDate={new Date()}
       />
       {apodData && <APOD {...apodData} />}
-    </Box>
+    </Stack>
   );
 };
 

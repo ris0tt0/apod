@@ -8,7 +8,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Production',
+      title: 'astronomy picture of the day',
       template: './public/index.html',
     }),
     new DotenvWebpackPlugin(),
