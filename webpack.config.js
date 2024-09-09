@@ -4,7 +4,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const config = {
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js',
+    filename: '[name]-bundle.js',
+    clean: true,
+    publicPath: '/',
   },
   module: {
     rules: [
@@ -22,6 +24,7 @@ const config = {
   },
   devtool: 'eval-source-map',
   devServer: {
+    static: './dist',
     historyApiFallback: true,
   },
   plugins: [

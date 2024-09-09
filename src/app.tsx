@@ -1,13 +1,16 @@
 import React from 'react';
 import { MUIProvider } from './mui/provider';
 import { Routes } from './routes';
+import { CommandsProvider } from './commands/provider';
 
 const App = () => {
   return (
     <MUIProvider>
-      <Routes />
+      <CommandsProvider>
+        <Routes />
+      </CommandsProvider>
     </MUIProvider>
   );
 };
 
-export { App };
+export default App;
