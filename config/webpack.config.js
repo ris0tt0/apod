@@ -1,12 +1,12 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 const config = {
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, '../dist'),
     filename: '[name]-bundle.js',
     clean: true,
-    publicPath: '/',
   },
   module: {
     rules: [
@@ -24,13 +24,19 @@ const config = {
   },
   devtool: 'eval-source-map',
   devServer: {
-    static: './dist',
+    static: path.resolve(__dirname, '../dist'),
     historyApiFallback: true,
   },
   plugins: [
     new HtmlWebpackPlugin({
       title: 'apod',
-      template: './public/index.html',
+      template: path.resolve(__dirname, '../public/index.html'),
+    }),
+    new Dotenv({
+      path: path.resolve(
+        __dirname,
+        `../.env.${process.env.NODE_ENV || 'development'}.local`,
+      ),
     }),
   ],
   resolve: {

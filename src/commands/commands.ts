@@ -57,7 +57,8 @@ class CommandsImpl implements Commands {
           resolve(result.data);
         })
         .catch((e) => {
-          reject((e: any) => Logger.error(`commands::requestGetDay${e}`));
+          Logger.info('👍🏾commands::requestGetDay', e);
+          reject(e);
         });
     });
 

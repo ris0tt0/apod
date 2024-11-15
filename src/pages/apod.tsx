@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { FC, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { formatFeedDateString, getCurentFormattedDate } from './utils';
 import Logger from 'js-logger';
@@ -8,7 +8,7 @@ type APODParams = {
   date: string | undefined;
 };
 
-const AstronomyPictureOfTtheDayPage = () => {
+const AstronomyPictureOfTtheDayPage: FC = () => {
   const { date } = useParams<APODParams>();
   const navigate = useNavigate();
 

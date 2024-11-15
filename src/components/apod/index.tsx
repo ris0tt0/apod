@@ -4,11 +4,7 @@ import { useCommands } from '../../commands/hooks';
 import { ApodItem } from '../../db';
 import { Box, Stack } from '@mui/material';
 import YouTube from 'react-youtube';
-
-const getYoutubeId = (url: string) => {
-  Logger.info('getYoutubeId', url);
-  return 'aX4ozspTPQY';
-};
+import { getYoutubeId } from '../utils';
 
 const ApodDisplayMedia: FC<{ item: ApodItem }> = ({ item }) => {
   if (item.media_type === 'image') {
@@ -44,7 +40,7 @@ const Apod: FC<{ date: string }> = ({ date }) => {
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {
-    Logger.info('👍🏾date', date, commands);
+    // Logger.info('👍🏾date', date, commands);
     setIsLoading(true);
     commands
       .requestDay(date)

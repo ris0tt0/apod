@@ -1,9 +1,6 @@
-import { Box } from '@mui/material';
-import React, { useEffect } from 'react';
+import React, { FC } from 'react';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { AstronomyPictureOfTtheDayPage } from './pages/apod';
-import { useCommands } from './commands/hooks';
-import Logger from 'js-logger';
 
 const router = createBrowserRouter([
   {
@@ -18,13 +15,7 @@ const router = createBrowserRouter([
 
 // https://apod.nasa.gov/apod/ap240530.html
 
-const Routes = () => {
-  const commands = useCommands();
-
-  useEffect(() => {
-    Logger.info('Roues::commands.init', commands.isInit);
-  }, []);
-
+const Routes: FC = () => {
   return <RouterProvider router={router} />;
 };
 

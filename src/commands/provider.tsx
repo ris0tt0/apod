@@ -1,40 +1,33 @@
-import React, {
-  PropsWithChildren,
-  ReactNode,
-  useEffect,
-  useState,
-} from 'react';
-import { CommandsContext } from './context';
+import { Box } from '@mui/material';
+import React, { FC, PropsWithChildren, useEffect, useState } from 'react';
 import { Commands } from '.';
-import CommandsImpl from './commands';
 import { ApodApi } from '../api';
 import { ApodApiImpl } from '../api/apodapi';
 import { ApodDB } from '../db';
 import { ApodIDB } from '../db/idb';
-import { Box } from '@mui/material';
+import CommandsImpl from './commands';
+import { CommandsContext } from './context';
 
-const InitingApp = () => {
+const InitingApp: FC = () => {
   return <Box>initing</Box>;
 };
-const InitingAppError = () => {
+const InitingAppError: FC = () => {
   return <Box>error😔</Box>;
 };
 
-const api: ApodApi = new ApodApiImpl();
-const db: ApodDB = new ApodIDB();
-const commands: Commands = new CommandsImpl({ api, db });
-
-export const CommandsProvider = ({ children }: { children: ReactNode }) => {
+export const CommandsProvider: FC<PropsWithChildren> = ({ children }) => {
   const [isError, setIsError] = useState(false);
-  const [isInit, setIsInit] = useState(true);
+  const [commands, setCommands] = useState<Commands | null>(null);
 
   useEffect(() => {
-    if (commands.isInit) return;
+    const api: ApodApi = new ApodApiImpl();
+    const db: ApodDB = new ApodIDB();
+    const commands: Commands = new CommandsImpl({ api, db });
 
     commands
       .init()
       .then(() => {
-        setIsInit(false);
+        setCommands(commands);
       })
       .catch(() => setIsError(true));
   }, []);
@@ -43,7 +36,7 @@ export const CommandsProvider = ({ children }: { children: ReactNode }) => {
     return <InitingAppError />;
   }
 
-  if (isInit) {
+  if (!commands) {
     return <InitingApp />;
   }
 

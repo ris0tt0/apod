@@ -20,7 +20,7 @@ export const formatFeedDateString = (date: string = '') => {
   const parsedDate = parse(date, 'yyyy-MM-dd', new Date(), { locale: enUS });
   const isValidDate = isValid(parsedDate);
 
-  Logger.info('formatFeedDateString', date, isValidDate);
+  Logger.info('formatFeedDateString', date, isValidDate, parsedDate);
 
   if (!isValidDate) {
     return null;
