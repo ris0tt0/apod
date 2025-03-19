@@ -1,13 +1,17 @@
 import React, { FC } from 'react';
-import { MUIProvider } from './mui/provider';
+import { CommandsProvider } from './providers/commands';
+import { MUIProvider } from './providers/mui';
 import { Routes } from './routes';
-import { CommandsProvider } from './commands/provider';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFnsV3';
 
 const App: FC = () => {
   return (
     <MUIProvider>
       <CommandsProvider>
-        <Routes />
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <Routes />
+        </LocalizationProvider>
       </CommandsProvider>
     </MUIProvider>
   );

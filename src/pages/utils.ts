@@ -1,8 +1,7 @@
 import { enUS } from 'date-fns/locale';
 import { format, isValid, parse } from 'date-fns';
-import Logger from 'js-logger';
 
-export const formatFeedDate = (date: any) => {
+export const formatFeedDate = (date: Date) => {
   const result = format(date, 'yyyy-MM-dd');
 
   return result;
@@ -19,8 +18,6 @@ export const getCurentFormattedDate = () => {
 export const formatFeedDateString = (date: string = '') => {
   const parsedDate = parse(date, 'yyyy-MM-dd', new Date(), { locale: enUS });
   const isValidDate = isValid(parsedDate);
-
-  Logger.info('formatFeedDateString', date, isValidDate, parsedDate);
 
   if (!isValidDate) {
     return null;
