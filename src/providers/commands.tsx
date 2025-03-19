@@ -1,18 +1,26 @@
-import { Box } from '@mui/material';
+import { styled } from '@mui/material';
 import React, { FC, PropsWithChildren, useEffect, useState } from 'react';
-import { Commands } from '.';
 import { ApodApi } from '../api';
 import { ApodApiImpl } from '../api/apodapi';
+import { Commands } from '../commands';
+import CommandsImpl from '../commands/commands';
+import { CommandsContext } from '../contexts/commands';
 import { ApodDB } from '../db';
 import { ApodIDB } from '../db/idb';
-import CommandsImpl from './commands';
-import { CommandsContext } from './context';
+
+const StatusContainer = styled('div')`
+  display: flex,
+  justifyContent: center,
+  alignItems: 'center,
+  height: 100%,
+  width: 100%,
+`;
 
 const InitingApp: FC = () => {
-  return <Box>initing</Box>;
+  return <StatusContainer>initing</StatusContainer>;
 };
 const InitingAppError: FC = () => {
-  return <Box>error😔</Box>;
+  return <StatusContainer>error😔</StatusContainer>;
 };
 
 export const CommandsProvider: FC<PropsWithChildren> = ({ children }) => {
@@ -46,3 +54,5 @@ export const CommandsProvider: FC<PropsWithChildren> = ({ children }) => {
     </CommandsContext.Provider>
   );
 };
+
+export default CommandsProvider;

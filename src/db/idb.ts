@@ -15,7 +15,6 @@ export class ApodIDB implements ApodDB {
         reject(false);
       };
       request.onsuccess = (event) => {
-        Logger.info('onsucess', event);
         this.db = request.result;
 
         resolve(true);

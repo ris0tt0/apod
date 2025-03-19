@@ -1,12 +1,22 @@
-import React, { FC, memo, useEffect, useState } from 'react';
+import { Box, Stack, styled } from '@mui/material';
 import Logger from 'js-logger';
-import { useCommands } from '../../commands/hooks';
-import { ApodItem } from '../../db';
-import { Box, Stack } from '@mui/material';
+import React, { FC, useEffect, useState } from 'react';
 import YouTube from 'react-youtube';
+import { ApodItem } from '../../db';
+import { useCommands } from '../../hooks/commands';
 import { getYoutubeId } from '../utils';
+import { AxiosError } from 'axios';
 
-const ApodDisplayMedia: FC<{ item: ApodItem }> = ({ item }) => {
+const ErrorLoading = styled('div')`
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+`;
+
+export const ApodDisplayMedia: FC<{ item: ApodItem }> = ({ item }) => {
   if (item.media_type === 'image') {
     return <img src={item.url} />;
   } else if (item.media_type === 'video') {
@@ -17,7 +27,7 @@ const ApodDisplayMedia: FC<{ item: ApodItem }> = ({ item }) => {
   return null;
 };
 
-const ApodDisplay: FC<{ item: ApodItem }> = ({ item }) => {
+export const ApodDisplay: FC<{ item: ApodItem }> = ({ item }) => {
   return (
     <Stack sx={{ m: 2 }}>
       <Box typography="h5" sx={{ mb: 2 }}>
@@ -33,21 +43,29 @@ const ApodDisplay: FC<{ item: ApodItem }> = ({ item }) => {
   );
 };
 
-const Apod: FC<{ date: string }> = ({ date }) => {
+/**
+ * Used to load the Astronomy Picture of the Day for the given date.
+ * @param date: string
+ * @returns void
+ */
+
+export const Apod: FC<{ date: string }> = ({ date }) => {
   const commands = useCommands();
   const [isLoading, setIsLoading] = useState(true);
   const [item, setItem] = useState<ApodItem | null>(null);
-  const [isError, setIsError] = useState(false);
+  const [isError, setIsError] = useState<{ msg: string } | null>(null);
 
   useEffect(() => {
-    // Logger.info('👍🏾date', date, commands);
     setIsLoading(true);
     commands
       .requestDay(date)
-      .then((result) => setItem(result))
-      .catch((error) => {
-        setIsError(true);
-        Logger.info('👍🏾requesetApodError', error);
+      .then((result) => {
+        setIsError(null);
+        setItem(result);
+      })
+      .catch((error: any) => {
+        // TODO fix error to be a string instead of AxiosError.
+        setIsError({ msg: error.response?.data?.msg ?? 'error' });
       })
       .finally(() => setIsLoading(false));
   }, [date]);
@@ -61,12 +79,8 @@ const Apod: FC<{ date: string }> = ({ date }) => {
   }
 
   if (isError) {
-    return <Box>error💥</Box>;
+    return <ErrorLoading>💥 {isError.msg}</ErrorLoading>;
   }
 
   return <ApodDisplay item={item} />;
 };
-
-const ApodMemo = memo(Apod);
-
-export default ApodMemo;

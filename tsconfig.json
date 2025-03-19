@@ -10,7 +10,7 @@
     "target": "ES2022",
     "allowJs": true,
     "esModuleInterop": true,
-    "jsx": "react",
+    "jsx": "react"
   },
-  "include": ["./src/**/*"],
+  "include": ["./src/**/*"]
 }

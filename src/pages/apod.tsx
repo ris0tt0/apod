@@ -1,8 +1,54 @@
-import React, { FC, useEffect } from 'react';
+import { Paper, styled } from '@mui/material';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import React, { FC, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { formatFeedDateString, getCurentFormattedDate } from './utils';
-import Logger from 'js-logger';
-import Apod from '../components/apod';
+import { Apod } from '../components/apod';
+import {
+  formatFeedDate,
+  formatFeedDateString,
+  getCurentFormattedDate,
+} from './utils';
+
+const DateControlsContainer = styled(Paper)`
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  width: 100%;
+  padding: 10px 0px;
+`;
+
+const DateControls = () => {
+  const { date } = useParams<APODParams>();
+  const navigate = useNavigate();
+  const [dateValue, setDateValue] = useState<Date>(new Date());
+
+  useEffect(() => {
+    if (date && date.length > 1) {
+      const value = formatFeedDateString(date);
+      if (value) {
+        setDateValue(value);
+      }
+    }
+  }, [date]);
+
+  const handleDateChange = (event: Date | null) => {
+    if (event) {
+      const date = formatFeedDate(event);
+      navigate(`/${date}`);
+    }
+  };
+
+  return (
+    <DateControlsContainer>
+      <DatePicker
+        sx={{ maxWidth: '300px' }}
+        label="Select date"
+        onChange={handleDateChange}
+        value={dateValue}
+      />
+    </DateControlsContainer>
+  );
+};
 
 type APODParams = {
   date: string | undefined;
@@ -17,10 +63,8 @@ const AstronomyPictureOfTtheDayPage: FC = () => {
 
     if (result === null) {
       const currentDate = getCurentFormattedDate();
-      Logger.info('👍🏾nave', currentDate);
       navigate(`/${currentDate}`, { replace: true });
     } else {
-      Logger.info('👍🏾nave 2', date);
       navigate(`/${date}`);
     }
   }, [date]);
@@ -29,7 +73,12 @@ const AstronomyPictureOfTtheDayPage: FC = () => {
     return null;
   }
 
-  return <Apod date={date} />;
+  return (
+    <>
+      <DateControls />
+      <Apod date={date} />
+    </>
+  );
 };
 
 export { AstronomyPictureOfTtheDayPage };
