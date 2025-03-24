@@ -5,9 +5,11 @@ import App from './app';
 
 const node = document.getElementById('jay-apod');
 
-if (node) {
+if (process.env.NODE_ENV === 'development') {
   Logger.useDefaults();
+}
 
+if (node) {
   const root = createRoot(node);
 
   root.render(<App />);

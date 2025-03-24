@@ -16,13 +16,6 @@ const StatusContainer = styled('div')`
   width: 100%,
 `;
 
-const InitingApp: FC = () => {
-  return <StatusContainer>initing</StatusContainer>;
-};
-const InitingAppError: FC = () => {
-  return <StatusContainer>error😔</StatusContainer>;
-};
-
 export const CommandsProvider: FC<PropsWithChildren> = ({ children }) => {
   const [isError, setIsError] = useState(false);
   const [commands, setCommands] = useState<Commands | null>(null);
@@ -41,11 +34,11 @@ export const CommandsProvider: FC<PropsWithChildren> = ({ children }) => {
   }, []);
 
   if (isError) {
-    return <InitingAppError />;
+    return <StatusContainer>error😔</StatusContainer>;
   }
 
   if (!commands) {
-    return <InitingApp />;
+    return <StatusContainer>initing</StatusContainer>;
   }
 
   return (

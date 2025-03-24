@@ -36,7 +36,6 @@ export class ApodIDB implements ApodDB {
           const customerObjectStore = request.result
             .transaction(DB_STORE, 'readwrite')
             .objectStore(DB_STORE);
-          Logger.info('storeDate.transaction.oncomplete', customerObjectStore);
         };
       };
     });
