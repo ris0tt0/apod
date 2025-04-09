@@ -21,7 +21,7 @@ const federationConfig = {
     'react-router-dom': { singleton: true },
   },
   exposes: {
-    // component
+    './DateUtils': path.resolve(__dirname, '../', 'src/pages/utils.ts'),
     './Apod': path.resolve(__dirname, '../', 'src/components/apod/index.tsx'),
     './CommandsProvider': path.resolve(
       __dirname,

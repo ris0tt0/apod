@@ -5,15 +5,12 @@ import { AstronomyPictureOfTtheDayPage } from './pages/apod';
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <AstronomyPictureOfTtheDayPage />,
-  },
-  {
-    path: '/:date',
-    element: <AstronomyPictureOfTtheDayPage />,
+    children: [
+      { index: true, Component: AstronomyPictureOfTtheDayPage },
+      { path: ':date', Component: AstronomyPictureOfTtheDayPage },
+    ],
   },
 ]);
-
-// https://apod.nasa.gov/apod/ap240530.html
 
 const Routes: FC = () => {
   return <RouterProvider router={router} />;
