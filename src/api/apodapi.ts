@@ -2,7 +2,7 @@ import Logger from 'js-logger';
 import { ApodApi, RangeParams } from '.';
 import axios, { AxiosInstance } from 'axios';
 
-const api_key = process.env.REACT_APP_API_KEY ?? 'DEMO_KEY';
+const api_key = process.env.BART_API_KEY ?? 'DEMO_KEY';
 
 const config = {
   baseURL: 'https://api.nasa.gov/planetary',

@@ -2,7 +2,7 @@ import Logger from 'js-logger';
 import { Commands } from '.';
 import { ApodApi } from '../api';
 import { ApodDB, ApodItem } from '../db';
-import { formatFeedDateString, getCurentFormattedDate } from '../pages/utils';
+import { formatFeedDateString, getCurentFormattedDate } from '../utils';
 
 export type CommandsImplParams = {
   api: ApodApi;
