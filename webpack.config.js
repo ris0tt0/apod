@@ -21,39 +21,32 @@ const federationConfig = {
     'react-router-dom': { singleton: true },
   },
   exposes: {
-    './DateUtils': path.resolve(__dirname, '../', 'src/pages/utils.ts'),
-    './Apod': path.resolve(__dirname, '../', 'src/components/apod/index.tsx'),
-    './CommandsProvider': path.resolve(
-      __dirname,
-      '../',
-      'src/providers/commands.tsx',
-    ),
+    './DateUtils': path.resolve(__dirname, 'src/utils.ts'),
+    './Apod': path.resolve(__dirname, 'src/components/apod/index.tsx'),
+    './CommandsProvider': path.resolve(__dirname, 'src/providers/commands.tsx'),
   },
 };
 
 const config = {
   entry: './src/index.ts',
   output: {
-    path: path.resolve(__dirname, '../', 'dist'),
+    path: path.resolve(__dirname, 'dist'),
     filename: 'apod-[name].js',
     clean: true,
   },
   devServer: {
-    static: path.resolve(__dirname, '../', 'dist'),
     historyApiFallback: true,
     port: 9002,
   },
   plugins: [
     new HtmlWebpackPlugin({
       title: 'apod',
-      template: path.resolve(__dirname, '../', 'public/index.html'),
+      template: path.resolve(__dirname, 'public/index.html'),
     }),
     new Dotenv({
-      path: path.resolve(
-        __dirname,
-        '../',
-        `.env.${process.env.NODE_ENV || 'development'}.local`,
-      ),
+      path: path.resolve(__dirname, '.env'),
+      safe: true,
+      defaults: true,
     }),
     new ModuleFederationPlugin({
       ...federationConfig,

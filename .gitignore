@@ -12,14 +12,16 @@
 #!.yarn/cache
 .pnp.*
 
+**/@mf-types/**
+stats.json
 
 # testing
-/dist
-
-# misc
+dist/
+lib/
+node_modules/
 .vscode/
+
 .DS_Store
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+
+.env
+

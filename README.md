@@ -6,10 +6,9 @@ React application that uses material ui for the styling, indexedDB for caching o
 
 A working version is hosted [here](http://jay-one-try.srv658343.hstgr.cloud/)
 
-To run this app, you need to create two .env files that represent dev and prod. For now we store our nasa issued api key within these files.
+To run this app, you need to create a .env file. For now we store our nasa issued api key within these files.
 
-.env.production.local
-.env.development.local
+.env
 
 which contains the nasa api key:
-REACT_APP_API_KEY=DEMO_KEY
+BART_API_KEY=DEMO_KEY

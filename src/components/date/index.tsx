@@ -1,23 +1,20 @@
-import { Paper, styled } from '@mui/material';
+import { Button, Paper, styled } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import React, { FC, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Apod } from '../components/apod';
-import {
-  formatFeedDate,
-  formatFeedDateString,
-  getCurentFormattedDate,
-} from './utils';
+import { APODParams } from '../../routes';
+import { formatFeedDate, formatFeedDateString } from '../../utils';
 
 const DateControlsContainer = styled(Paper)`
   display: flex;
   flex: 1;
+  gap: 1rem;
   justify-content: center;
   width: 100%;
   padding: 10px 0px;
 `;
 
-const DateControls = () => {
+export const DateControls = () => {
   const { date } = useParams<APODParams>();
   const navigate = useNavigate();
   const [dateValue, setDateValue] = useState<Date>(new Date());
@@ -34,8 +31,14 @@ const DateControls = () => {
   const handleDateChange = (event: Date | null) => {
     if (event) {
       const date = formatFeedDate(event);
-      navigate(`/${date}`);
+      // navigate(`/${date}`);
+      setDateValue(event);
     }
+  };
+
+  const handleClick = () => {
+    const date = formatFeedDate(dateValue);
+    navigate(`${date}`);
   };
 
   return (
@@ -46,39 +49,9 @@ const DateControls = () => {
         onChange={handleDateChange}
         value={dateValue}
       />
+      <Button variant="outlined" onClick={handleClick}>
+        select
+      </Button>
     </DateControlsContainer>
   );
 };
-
-type APODParams = {
-  date: string | undefined;
-};
-
-const AstronomyPictureOfTtheDayPage: FC = () => {
-  const { date } = useParams<APODParams>();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const result = formatFeedDateString(date);
-
-    if (result === null) {
-      const currentDate = getCurentFormattedDate();
-      navigate(`/${currentDate}`, { replace: true });
-    } else {
-      navigate(`/${date}`);
-    }
-  }, [date]);
-
-  if (!date) {
-    return null;
-  }
-
-  return (
-    <>
-      <DateControls />
-      <Apod date={date} />
-    </>
-  );
-};
-
-export { AstronomyPictureOfTtheDayPage };
