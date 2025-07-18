@@ -1,11 +1,9 @@
 import { Box, Stack, styled } from '@mui/material';
-import Logger from 'js-logger';
 import React, { FC, useEffect, useState } from 'react';
 import YouTube from 'react-youtube';
 import { ApodItem } from '../../db';
 import { useCommands } from '../../hooks/commands';
 import { getYoutubeId } from '../utils';
-import { AxiosError } from 'axios';
 
 const ErrorLoading = styled('div')`
   display: flex;

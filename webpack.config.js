@@ -32,11 +32,12 @@ const config = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'apod-[name].js',
+    publicPath: '/',
     clean: true,
   },
   devServer: {
     historyApiFallback: true,
-    port: 9002,
+    port: 9003,
   },
   plugins: [
     new HtmlWebpackPlugin({
