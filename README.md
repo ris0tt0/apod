@@ -8,7 +8,7 @@ Using nasa open api, I have created a react application to view the photo/video 
 
 React application that uses material ui for the styling, indexedDB for caching of the apod data. This application also utilizes module federation to expose the apod component for use in a different application.
 
-A working version is hosted [here](http://jay-one-try.srv658343.hstgr.cloud/)
+A working version is hosted [here](http://jay-apod.srv658343.hstgr.cloud/)
 
 ## Getting Started
 
@@ -59,8 +59,5 @@ This project is licensed under the MIT License - see the LICENSE.md file for det
 
 ## Acknowledgments
 
+- [Nasa open APIs](https://api.nasa.gov/)
 - [awesome-readme](https://github.com/matiassingers/awesome-readme)
-- [PurpleBooth](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2)
-- [dbader](https://github.com/dbader/readme-template)
-- [zenorocha](https://gist.github.com/zenorocha/4526327)
-- [fvcproductions](https://gist.github.com/fvcproductions/1bfc2d4aecb01a834b46)
