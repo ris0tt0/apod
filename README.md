@@ -1,63 +1,41 @@
-# Project Title
+# Astronomy Picture of the Day (APOD)
 
-Astronomy Picture of the Day.
+A single-page React application to explore space through NASA’s Astronomy Picture of the Day.
 
 ## Description
 
-Using nasa open api, I have created a react application to view the photo/video of the day!
+**The Astronomy Picture of the Day (APOD)** is a single-page application built to explore space through NASA’s Open APIs. This app allows users to browse the daily Astronomy Picture of the Day provided by NASA, offering a unique and educational look at our universe.
 
-React application that uses material ui for the styling, indexedDB for caching of the apod data. This application also utilizes module federation to expose the apod component for use in a different application.
+You can select any date using the calendar, then click **Select** to view the APOD for that day — including its title, description, and high-resolution image or video.
 
-A working version is hosted [here](http://jay-apod.srv658343.hstgr.cloud/)
+This project is built with **React.js**, uses **Material UI** for styling, **Axios** for API communication, and **IndexedDB** for local caching and offline access. It also utilizes **Module Federation** to expose the APOD component for use in other applications.
+
+🔗 A working version is hosted [here](http://jay-apod.srv658343.hstgr.cloud/)
 
 ## Getting Started
 
 ### Dependencies
 
-- Yarn 4.9.2
-- Node > 21
+- Yarn v4.9.2
+- Node.js > v21
 
 ### Installing
 
-- run yarn command to install dependencies.
+Install dependencies:
 
-```
+```bash
 yarn
 ```
+### Running the App
 
-- for users of vscode, run yarn dlx @yarnpkg/sdks vscode
+Start the development server:
 
 ```
 yarn dlx @yarnpkg/sdks vscode
 ```
 
-- visit [api.nasa.gov](https://api.nasa.gov/) to get your own api key and place into created .env file. This allows the application to use your newly created key.
+### Authors
+Jonathan Gee – j@jonathangee.com
 
-### Executing program
-
-- Run development server by using yarn start.
-
-```
-yarn start
-```
-
-- Build prod version by using yarn build:prod
-
-```
-yarn build:prod
-```
-
-## Authors
-
-Contributors names and contact info
-
-Jonathan Gee [j@jonathangee.com](mailto:j@jonathangee.com)
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE.md file for details
-
-## Acknowledgments
-
-- [Nasa open APIs](https://api.nasa.gov/)
-- [awesome-readme](https://github.com/matiassingers/awesome-readme)
+### License
+This project is licensed under the MIT License
