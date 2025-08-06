@@ -10,7 +10,7 @@ You can select any date using the calendar, then click **Select** to view the AP
 
 This project is built with **React.js**, uses **Material UI** for styling, **Axios** for API communication, and **IndexedDB** for local caching and offline access. It also utilizes **Module Federation** to expose the APOD component for use in other applications.
 
-🔗 A working version is hosted [here](http://jay-apod.srv658343.hstgr.cloud/)
+🔗 A working version is hosted [here](https://apod.jrgee.com/)
 
 ## Getting Started
 
@@ -26,6 +26,7 @@ Install dependencies:
 ```bash
 yarn
 ```
+
 ### Running the App
 
 Start the development server:
@@ -35,7 +36,9 @@ yarn dlx @yarnpkg/sdks vscode
 ```
 
 ### Authors
+
 Jonathan Gee – j@jonathangee.com
 
 ### License
+
 This project is licensed under the MIT License
