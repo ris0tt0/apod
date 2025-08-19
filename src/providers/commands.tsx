@@ -1,4 +1,4 @@
-import { styled } from '@mui/material';
+import { LinearProgress, styled } from '@mui/material';
 import React, { FC, PropsWithChildren, useEffect, useState } from 'react';
 import { ApodApi } from '../api';
 import { ApodApiImpl } from '../api/apodapi';
@@ -38,7 +38,11 @@ export const CommandsProvider: FC<PropsWithChildren> = ({ children }) => {
   }
 
   if (!commands) {
-    return <StatusContainer>initing</StatusContainer>;
+    return (
+      <StatusContainer>
+        <LinearProgress sx={{ width: '300px' }} variant="indeterminate" />
+      </StatusContainer>
+    );
   }
 
   return (
