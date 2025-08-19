@@ -1,6 +1,7 @@
 import React from 'react';
 import { LinkStyled } from '../styled';
 import { styled } from '@mui/material';
+import ApodModule from '../modules/apod';
 
 const AboutRouteContainer = styled('div')`
   display: flex;
