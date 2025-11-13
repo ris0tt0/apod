@@ -5,6 +5,8 @@ import App from './app';
 
 const node = document.getElementById('jay-apod');
 
+// console.log('envasdfasdf', process.env.NODE_ENV);
+
 if (process.env.NODE_ENV === 'development') {
   Logger.useDefaults();
 }

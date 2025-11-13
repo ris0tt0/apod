@@ -10,7 +10,7 @@ const ErrorLoading = styled('div')`
   flex: 1;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 500px;
   width: 100%;
 `;
 
@@ -27,13 +27,14 @@ export const ApodDisplayMedia: FC<{ item: ApodItem }> = ({ item }) => {
 
 export const ApodDisplay: FC<{ item: ApodItem }> = ({ item }) => {
   return (
-    <Stack sx={{ m: 2 }}>
-      <Box typography="h5" sx={{ mb: 2 }}>
+    <Stack component={'article'} sx={{ m: 2 }}>
+      <Box component="h2" sx={{ mb: 2 }}>
         {item.title}
       </Box>
       <ApodDisplayMedia item={item} />
-
-      <Box sx={{ px: 1, my: 2 }}>{item.explanation}</Box>
+      <Box component={'p'} sx={{ px: 1, my: 2 }}>
+        {item.explanation}
+      </Box>
       <Box typography="caption" alignItems={'end'}>
         {item.copyright}
       </Box>
@@ -68,16 +69,16 @@ export const Apod: FC<{ date: string }> = ({ date }) => {
       .finally(() => setIsLoading(false));
   }, [date]);
 
+  if (isError) {
+    return <ErrorLoading>💥 {isError.msg}</ErrorLoading>;
+  }
+
   if (isLoading) {
     return null;
   }
 
   if (!item) {
     return null;
-  }
-
-  if (isError) {
-    return <ErrorLoading>💥 {isError.msg}</ErrorLoading>;
   }
 
   return <ApodDisplay item={item} />;

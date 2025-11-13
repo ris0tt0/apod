@@ -5,7 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { APODParams } from '../../routes';
 import { formatFeedDate, formatFeedDateString } from '../../utils';
 
-const DateControlsContainer = styled(Paper)`
+const DateControlsContainer = styled('nav')`
   display: flex;
   flex: 1;
   gap: 1rem;
@@ -17,7 +17,7 @@ const DateControlsContainer = styled(Paper)`
 export const DateControls = () => {
   const { date } = useParams<APODParams>();
   const navigate = useNavigate();
-  const [dateValue, setDateValue] = useState<Date>(new Date());
+  const [dateValue, setDateValue] = useState<Date>(new Date('10-1-2025'));
 
   useEffect(() => {
     if (date && date.length > 1) {
@@ -31,7 +31,6 @@ export const DateControls = () => {
   const handleDateChange = (event: Date | null) => {
     if (event) {
       const date = formatFeedDate(event);
-      // navigate(`/${date}`);
       setDateValue(event);
     }
   };
