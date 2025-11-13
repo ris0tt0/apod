@@ -18,7 +18,6 @@ export const AboutRoute = () => {
   return (
     <AboutRouteContainer>
       <ContentContainer>
-        <h1>Astronomy Picture of the day</h1>
         <p>
           The Astronomy Picture of the Day (APOD) is a single-page application
           built to explore space through NASA`s Open APIs. This app allows users

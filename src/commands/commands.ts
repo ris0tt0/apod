@@ -2,7 +2,7 @@ import Logger from 'js-logger';
 import { Commands } from '.';
 import { ApodApi } from '../api';
 import { ApodDB, ApodItem } from '../db';
-import { formatFeedDateString, getCurentFormattedDate } from '../utils';
+import { formatFeedDateString, getCurrentFormattedDate } from '../utils';
 
 export type CommandsImplParams = {
   api: ApodApi;
@@ -37,7 +37,7 @@ class CommandsImpl implements Commands {
     if (data === null) {
       const valid = formatFeedDateString(date);
       if (valid === null) {
-        const current = getCurentFormattedDate();
+        const current = getCurrentFormattedDate();
 
         const retVal = await this.requestGetDay(current);
         return retVal;
