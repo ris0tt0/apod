@@ -36,7 +36,7 @@
     "@mui/material": "7.3.1",
     "@mui/system": "7.3.1",
     "@mui/x-date-pickers": "8.10.0",
-    "axios": "^1.13.2",
+    "axios": "^1.13.5",
     "date-fns": "4.1.0",
     "form-data": "4.0.4",
     "js-logger": "1.6.1",
