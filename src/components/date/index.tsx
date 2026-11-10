@@ -17,7 +17,7 @@ const DateControlsContainer = styled('nav')`
 export const DateControls = () => {
   const { date } = useParams<APODParams>();
   const navigate = useNavigate();
-  const [dateValue, setDateValue] = useState<Date>(new Date('10-1-2025'));
+  const [dateValue, setDateValue] = useState<Date>(new Date());
 
   useEffect(() => {
     if (date && date.length > 1) {
