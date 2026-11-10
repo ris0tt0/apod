@@ -1,4 +1,4 @@
-import { Box, Stack, styled } from '@mui/material';
+import { Box, Skeleton, Stack, styled } from '@mui/material';
 import React, { FC, useEffect, useState } from 'react';
 import YouTube from 'react-youtube';
 import { ApodItem } from '../../db';
@@ -25,18 +25,37 @@ export const ApodDisplayMedia: FC<{ item: ApodItem }> = ({ item }) => {
   return null;
 };
 
-export const ApodDisplay: FC<{ item: ApodItem }> = ({ item }) => {
+export const ApodDisplay: FC<{ loading: boolean; item: ApodItem }> = ({
+  loading,
+  item,
+}) => {
   return (
-    <Stack component={'article'} sx={{ m: 2 }}>
+    <Stack component={'article'}>
       <Box component="h2" sx={{ mb: 2 }}>
-        {item.title}
+        {loading ? <Skeleton /> : item.title}
       </Box>
-      <ApodDisplayMedia item={item} />
+      {loading ? (
+        <Skeleton
+          variant="rectangular"
+          sx={{ width: '800px', height: '400px' }}
+        />
+      ) : (
+        <ApodDisplayMedia item={item} />
+      )}
       <Box component={'p'} sx={{ px: 1, my: 2 }}>
-        {item.explanation}
+        {loading ? (
+          <>
+            <Skeleton />
+            <Skeleton />
+            <Skeleton />
+            <Skeleton />
+          </>
+        ) : (
+          item.explanation
+        )}
       </Box>
-      <Box typography="caption" alignItems={'end'}>
-        {item.copyright}
+      <Box component="address" display={'flex'} sx={{ justifyContent: 'end' }}>
+        <i>{item.copyright}</i>
       </Box>
     </Stack>
   );
@@ -63,7 +82,6 @@ export const Apod: FC<{ date: string }> = ({ date }) => {
         setItem(result);
       })
       .catch((error: any) => {
-        // TODO fix error to be a string instead of AxiosError.
         setIsError({ msg: error.response?.data?.msg ?? 'error' });
       })
       .finally(() => setIsLoading(false));
@@ -73,13 +91,9 @@ export const Apod: FC<{ date: string }> = ({ date }) => {
     return <ErrorLoading>💥 {isError.msg}</ErrorLoading>;
   }
 
-  if (isLoading) {
-    return null;
-  }
-
   if (!item) {
     return null;
   }
 
-  return <ApodDisplay item={item} />;
+  return <ApodDisplay loading={isLoading} item={item} />;
 };
