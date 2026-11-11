@@ -1,27 +1,24 @@
-import { enUS } from 'date-fns/locale';
-import { format, isValid, parse } from 'date-fns';
+export function isValidISODate(date: string) {
+  // 1. Check basic regex pattern match
+  const regex = /^\d{4}-\d{2}-\d{2}$/;
+  if (!regex.test(date)) return false;
 
-export const formatFeedDate = (date: Date) => {
-  const result = format(date, 'yyyy-MM-dd');
+  // 2. Parse numbers
+  const [year, month, day] = date.split("-").map(Number);
 
-  return result;
-};
+  // 3. Construct Date (Note: Month is 0-indexed in JS)
+  const dateObj = new Date(year, month - 1, day);
 
-export const getCurrentFormattedDate = () => {
+  // 4. Verify no calendar rollover occurred
+  return (
+    dateObj.getFullYear() === year &&
+    dateObj.getMonth() === month - 1 &&
+    dateObj.getDate() === day
+  );
+}
+
+export function getISOToday() {
   const date = new Date();
 
-  const result = formatFeedDate(date);
-
-  return result;
-};
-
-export const formatFeedDateString = (date: string = '') => {
-  const parsedDate = parse(date, 'yyyy-MM-dd', new Date(), { locale: enUS });
-  const isValidDate = isValid(parsedDate);
-
-  if (!isValidDate) {
-    return null;
-  }
-
-  return parsedDate;
-};
+  return `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+}
