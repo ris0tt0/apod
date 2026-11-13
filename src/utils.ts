@@ -4,7 +4,7 @@ export function isValidISODate(date: string) {
   if (!regex.test(date)) return false;
 
   // 2. Parse numbers
-  const [year, month, day] = date.split("-").map(Number);
+  const [year, month, day] = date.split('-').map(Number);
 
   // 3. Construct Date (Note: Month is 0-indexed in JS)
   const dateObj = new Date(year, month - 1, day);

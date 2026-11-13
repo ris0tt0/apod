@@ -1,15 +1,14 @@
-import { createBrowserRouter } from "react-router";
-import { RouterProvider } from "react-router/dom";
-import Home from "./home";
-import APOD from "./apod";
-import { useState } from "react";
-import { getISOToday } from "./utils";
-import Logger from "js-logger";
+import { createBrowserRouter } from 'react-router';
+import { RouterProvider } from 'react-router/dom';
+import Home from './home';
+import APOD from './apod';
+import { useState } from 'react';
+import { getISOToday } from './utils';
 
 const router = createBrowserRouter([
-  { path: "/", element: <Home /> },
+  { path: '/', element: <Home /> },
   {
-    path: ":date",
+    path: ':date',
     element: <APOD />,
   },
 ]);

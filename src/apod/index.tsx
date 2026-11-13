@@ -1,6 +1,6 @@
-import Logger from "js-logger";
-import { useParams } from "react-router";
-import { isValidISODate } from "../utils";
+import Logger from 'js-logger';
+import { useParams } from 'react-router';
+import { isValidISODate } from '../utils';
 
 type DateParams = {
   date: string;
@@ -8,9 +8,9 @@ type DateParams = {
 
 export default function APOD() {
   const params = useParams<DateParams>();
-  Logger.log("date", params.date);
+  Logger.log('date', params.date);
 
-  const isValidDate = isValidISODate(params.date ?? "");
+  const isValidDate = isValidISODate(params.date ?? '');
 
   return <div>This is the apod</div>;
 }
