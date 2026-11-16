@@ -1,5 +1,5 @@
-import Logger from 'js-logger';
-import { useParams } from 'react-router';
+import { useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router';
 import { isValidISODate } from '../utils';
 
 type DateParams = {
@@ -8,9 +8,12 @@ type DateParams = {
 
 export default function APOD() {
   const params = useParams<DateParams>();
-  Logger.log('date', params.date);
-
+  const navigate = useNavigate();
   const isValidDate = isValidISODate(params.date ?? '');
 
-  return <div>This is the apod</div>;
+  useEffect(() => {
+    if (!isValidDate) navigate('/');
+  }, [isValidDate]);
+
+  return <div className="flex flex-1">This is the apod: {params.date}</div>;
 }
