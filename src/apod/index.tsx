@@ -56,17 +56,15 @@ const options = {
 export const ApodItemDisplay = ({ apod }: { apod: ApodItem }) => {
   Logger.info('ApodItemDIsplay', apod);
   return (
-    <div className="flex flex-1 flex-col">
+    <div className="flex flex-1 flex-col py-2">
       <h2 className="text-3xl font-bold">{apod.title}</h2>
       <img
         src={apod.hdurl}
-        alt={apod.title}
+        alt={apod.alt}
         className="my-4 rounded-lg shadow-md"
       />
       <p>{parse(apod.explanation ?? '', options)}</p>
-      <p>
-        <strong>Copyright:</strong> {parse(apod.copyright ?? '', options)}
-      </p>
+      <p>{parse(apod.copyright ?? '', options)}</p>
     </div>
   );
 };

@@ -16,16 +16,22 @@ export default function DatePicker() {
   return (
     <form
       onSubmit={handleOnSubmit}
-      // action={dateValue}
       method="post"
-      className="flex flex-col border border-amber-400"
+      className="flex flex-col  py-2"
     >
-      <label htmlFor="start">APOD Date:</label>
-      <div>
+      <p>here we explain that you have to pick the date</p>
+      <div className="flex items-baseline justify-center">
+        <label
+          htmlFor="start"
+          className="block px-3 text-sm font-medium text-gray-900"
+        >
+          APOD Date:
+        </label>
         <input
           type="date"
           id="start"
           name="trip-start"
+          className="bg-slate-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5"
           value={dateValue}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setDateValue(e.target.value);
@@ -33,7 +39,11 @@ export default function DatePicker() {
         />
       </div>
       <div>
-        <input type="submit" value="Send Request" />
+        <input
+          className="border border-slate-600 p-2 bg-slate-100 rounded-2xl"
+          type="submit"
+          value="Send Request"
+        />
       </div>
     </form>
   );
