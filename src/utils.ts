@@ -1,3 +1,5 @@
+import Logger from 'js-logger';
+
 export function isValidISODate(date: string) {
   // 1. Check basic regex pattern match
   const regex = /^\d{4}-\d{2}-\d{2}$/;
@@ -21,4 +23,19 @@ export function getISOToday() {
   const date = new Date();
 
   return `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+}
+
+const isoDateRegex = /^\d{4}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12]\d|3[01])$/;
+
+export function getApiDateString(date: string) {
+  if (isoDateRegex.test(date)) {
+    const removeDash = date.replaceAll('-', '');
+    const result = removeDash.slice(2);
+
+    return result;
+  } else {
+    Logger.warn('getApiDateString invalid date', date);
+
+    return null;
+  }
 }
