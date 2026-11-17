@@ -1,5 +1,5 @@
 import Logger from 'js-logger';
-import { ApodIDB } from '../db';
+import { ApodIDB, type ApodItem } from '../db';
 import { getBasic } from './api';
 import { getApiDateString } from '../utils';
 
@@ -9,7 +9,7 @@ export const getJSONForDate = async (date: string) => {
   const dateData = await db.getData([date]);
 
   if (dateData.length === 1 && dateData[0] !== null) {
-    return dateData[0];
+    return dateData[0] as ApodItem;
   } else {
     const apiString = getApiDateString(date);
     if (apiString !== null) {
@@ -17,7 +17,7 @@ export const getJSONForDate = async (date: string) => {
 
       await db.setData([result.data]);
 
-      return result.data;
+      return result.data as ApodItem;
     }
 
     Logger.warn('getJSONForDate unknown result');

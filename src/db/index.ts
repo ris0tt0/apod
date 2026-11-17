@@ -35,11 +35,10 @@ export class ApodIDB {
   init() {
     const retVal = new Promise<boolean>((resolve, reject) => {
       const request = indexedDB.open(DB_NAME, DB_VERSION);
-      request.onerror = (event) => {
-        Logger.info('onerror', event);
+      request.onerror = () => {
         reject(false);
       };
-      request.onsuccess = (event) => {
+      request.onsuccess = () => {
         this.db = request.result;
 
         resolve(true);
@@ -63,7 +62,7 @@ export class ApodIDB {
         });
 
         storeDate.transaction.oncomplete = () => {
-          const customerObjectStore = request.result
+          request.result
             .transaction(DB_STORE, 'readwrite')
             .objectStore(DB_STORE);
         };
