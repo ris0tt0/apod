@@ -17,7 +17,7 @@ export default function DatePicker() {
     <form
       onSubmit={handleOnSubmit}
       method="post"
-      className="flex flex-col  py-2"
+      className="flex flex-col py-2"
     >
       <p>here we explain that you have to pick the date</p>
       <div className="flex items-baseline justify-center">
@@ -37,13 +37,13 @@ export default function DatePicker() {
             setDateValue(e.target.value);
           }}
         />
-      </div>
-      <div>
-        <input
-          className="border border-slate-600 p-2 bg-slate-100 rounded-2xl"
-          type="submit"
-          value="Send Request"
-        />
+        <div className="px-2">
+          <input
+            className="border border-slate-600 p-2 bg-slate-100 rounded-2xl"
+            type="submit"
+            value="Send Request"
+          />
+        </div>
       </div>
     </form>
   );
