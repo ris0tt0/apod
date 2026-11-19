@@ -8,7 +8,7 @@ A single-page React application to explore space through NASA’s Astronomy Pict
 
 You can select any date using the calendar, then click **Select** to view the APOD for that day — including its title, description, and high-resolution image or video.
 
-This project is built with **React.js**, uses **Material UI** for styling, **Axios** for API communication, and **IndexedDB** for local caching and offline access. It also utilizes **Module Federation** to expose the APOD component for use in other applications.
+This project is built with **Vite**, uses **React.js** and **tailwindcss** for styling, **Axios** for API communication, and **IndexedDB** for local caching.
 
 🔗 A working version is hosted [here](https://apod.jrgee.com/)
 
@@ -16,23 +16,23 @@ This project is built with **React.js**, uses **Material UI** for styling, **Axi
 
 ### Dependencies
 
-- Yarn v4.9.2
-- Node.js > v21
+- pnpm > v12.18.0
+- Node.js > v26.13.1
 
 ### Installing
 
 Install dependencies:
 
 ```bash
-yarn
+pnpm install
 ```
 
 ### Running the App
 
 Start the development server:
 
-```
-yarn dlx @yarnpkg/sdks vscode
+```bash
+pnpm run dev
 ```
 
 ### Authors

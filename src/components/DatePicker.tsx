@@ -1,30 +1,28 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
+import type { DateParams } from '../apod';
 import { getISOToday } from '../utils';
-import Logger from 'js-logger';
 
 export default function DatePicker() {
-  const today = getISOToday();
+  const params = useParams<DateParams>();
+
+  const today = params.date ?? getISOToday();
   const navigate = useNavigate();
   const [dateValue, setDateValue] = useState(today);
 
   const handleOnSubmit = (e: React.SubmitEvent) => {
     e.preventDefault();
-    Logger.info('onsubmut', dateValue);
     navigate(dateValue);
   };
+
   return (
     <form
       onSubmit={handleOnSubmit}
       method="post"
       className="flex flex-col py-2"
     >
-      <p>here we explain that you have to pick the date</p>
       <div className="flex items-baseline justify-center">
-        <label
-          htmlFor="start"
-          className="block px-3 text-sm font-medium text-gray-900"
-        >
+        <label htmlFor="start" className="block px-3 font-medium text-gray-900">
           APOD Date:
         </label>
         <input
@@ -39,9 +37,9 @@ export default function DatePicker() {
         />
         <div className="px-2">
           <input
-            className="border border-slate-600 p-2 bg-slate-100 rounded-2xl"
+            className="border rounded-lg border-slate-100 p-2 bg-slate-100  hover:ring-blue-500 hover:border-blue-500"
             type="submit"
-            value="Send Request"
+            value="Load APOD"
           />
         </div>
       </div>

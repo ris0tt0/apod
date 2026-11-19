@@ -1,81 +1,20 @@
-import Logger from 'js-logger';
-import parse, { attributesToProps, domToReact } from 'html-react-parser';
-import { useEffect, useState, useTransition } from 'react';
+import { Suspense, useEffect, useState, useTransition } from 'react';
 import { useNavigate, useParams } from 'react-router';
+import ApodItemDisplay from '../components/ApodDisplay';
 import { getJSONForDate } from '../controller';
-import { isValidISODate } from '../utils';
 import type { ApodItem } from '../db';
+import { isValidISODate } from '../utils';
+import Logger from 'js-logger';
 
-type DateParams = {
+export type DateParams = {
   date: string;
 };
 
-const options = {
-  replace: (domNode: any) => {
-    if (domNode.type !== 'tag') return;
-
-    const props = attributesToProps(domNode.attribs);
-
-    switch (domNode.name) {
-      case 'h1':
-        return (
-          <h1 {...props} className="text-3xl font-bold text-gray-900 mb-4">
-            {domToReact(domNode.children, options)}
-          </h1>
-        );
-      case 'p':
-        return (
-          <p
-            {...props}
-            className="text-base text-gray-700 leading-relaxed mb-4"
-          >
-            {domToReact(domNode.children, options)}
-          </p>
-        );
-      case 'a':
-        return (
-          <a
-            {...props}
-            className="text-blue-600 underline hover:text-blue-800 visited:text-purple-600"
-          >
-            {domToReact(domNode.children, options)}
-          </a>
-        );
-      case 'ul':
-        return (
-          <ul {...props} className="list-disc pl-5 space-y-2 mb-4">
-            {domToReact(domNode.children, options)}
-          </ul>
-        );
-      default:
-        return;
-    }
-  },
-};
-
-export const ApodItemDisplay = ({ apod }: { apod: ApodItem }) => {
-  Logger.info('ApodItemDIsplay', apod);
-  return (
-    <div className="flex flex-1 flex-col py-2">
-      <h2 className="text-3xl font-bold">{apod.title}</h2>
-      <img
-        src={apod.hdurl}
-        alt={apod.alt}
-        className="my-4 rounded-lg shadow-md"
-      />
-      <p>{parse(apod.explanation ?? '', options)}</p>
-      <p>{parse(apod.copyright ?? '', options)}</p>
-    </div>
-  );
-};
-
-export default function APOD() {
+function APOD() {
   const [apod, setApod] = useState<ApodItem | null>(null);
   const params = useParams<DateParams>();
   const navigate = useNavigate();
   const [isPending, startTransition] = useTransition();
-
-  Logger.info('APOD', params);
 
   useEffect(() => {
     const isValidDate = isValidISODate(params.date ?? '');
@@ -83,8 +22,11 @@ export default function APOD() {
     if (!isValidDate) navigate('/');
     else {
       startTransition(async () => {
+        Logger.info('APOD start transistion', params);
         const data = await getJSONForDate(params.date ?? '');
+
         if (data) {
+          Logger.info('APOD start transistion 2', data);
           setApod(data);
         }
       });
@@ -92,10 +34,23 @@ export default function APOD() {
   }, [params]);
 
   if (isPending) {
+    Logger.info('APOD 3');
     return <div className="flex flex-1">loading apod data</div>;
   }
 
-  if (apod !== null) return <ApodItemDisplay apod={apod} />;
+  if (apod !== null) {
+    Logger.info('APOD 4');
+    return <ApodItemDisplay apod={apod} />;
+  }
 
+  Logger.info('APOD 5');
   return null;
+}
+
+export default function ApodImpl() {
+  return (
+    <Suspense fallback={<div>Loadings</div>}>
+      <APOD />
+    </Suspense>
+  );
 }
