@@ -37,7 +37,7 @@ export default function DatePicker() {
         />
         <div className="px-2">
           <input
-            className="border rounded-lg border-slate-100 p-2 bg-slate-100  hover:ring-blue-500 hover:border-blue-500"
+            className="border rounded-lg border-gray-300 p-1 bg-slate-100  hover:ring-blue-500 hover:outline-blue-500 hover:outline-2"
             type="submit"
             value="Load APOD"
           />
