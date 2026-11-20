@@ -26,8 +26,10 @@ export class ApodIDB {
 
   public static async getInstance(): Promise<ApodIDB> {
     if (!ApodIDB.instance) {
-      ApodIDB.instance = new ApodIDB();
-      await ApodIDB.instance.init();
+      const idb = new ApodIDB();
+      await idb.init();
+
+      ApodIDB.instance = idb;
     }
     return ApodIDB.instance;
   }
@@ -51,7 +53,6 @@ export class ApodIDB {
           resolve(false);
         };
 
-        // request.result.deleteObjectStore
         if (request.result.objectStoreNames.contains(DB_STORE)) {
           request.result.deleteObjectStore(DB_STORE);
         }

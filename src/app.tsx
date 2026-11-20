@@ -4,6 +4,8 @@ import APOD from './apod';
 import Home from './home';
 import LandingPage from './landing';
 import Logger from 'js-logger';
+import { useEffect, useState } from 'react';
+import { ApodIDB } from './db';
 
 function RootErrorBoundary() {
   const error = useRouteError();
@@ -30,7 +32,18 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  Logger.info('App');
+  // const [isInit, setIsInit] = useState(false);
+
+  // useEffect(() => {
+  //   const init = async () => {
+  //     await ApodIDB.getInstance();
+  //     setIsInit(true);
+  //   };
+
+  //   init();
+  // }, []);
+
+  // if (!isInit) return null;
   return <RouterProvider router={router} />;
 }
 
