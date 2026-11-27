@@ -16,8 +16,8 @@ This project is built with **Vite**, uses **React.js** and **tailwindcss** for s
 
 ### Dependencies
 
-- pnpm > v12.18.0
-- Node.js > v26.13.1
+- pnpm ^12.24.0
+- Node.js ^26.13.1
 
 ### Installing
 
@@ -26,6 +26,10 @@ Install dependencies:
 ```bash
 pnpm install
 ```
+
+### Environment Variables
+
+copy .env.sample to .env and then add your own NASA Open APIs key. You can generate your key here: https://api.nasa.gov/
 
 ### Running the App
 

@@ -2,7 +2,7 @@ import Logger from 'js-logger';
 
 const DB_NAME = 'apod-db';
 const DB_STORE = 'apod-date';
-const DB_VERSION = 2;
+const DB_VERSION = 3;
 
 export type ApodItem = {
   alt: string;
