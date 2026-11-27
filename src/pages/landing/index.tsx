@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router';
-import DatePicker from '../components/DatePicker';
+import DatePicker from '../../components/DatePicker';
 
 export default function LandingPage() {
   return (

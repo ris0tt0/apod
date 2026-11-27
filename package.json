@@ -1,7 +1,7 @@
 {
   "name": "apod",
   "private": true,
-  "version": "0.0.0",
+  "version": "2.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -29,14 +29,18 @@
     "typescript": "~7.0.2",
     "vite": "^8.3.6"
   },
+  "engines": {
+    "node": "^26.13.1",
+    "pnpm": "^12.24.0"
+  },
   "devEngines": {
     "packageManager": {
       "name": "pnpm",
-      "version": "12.18.0"
+      "version": "^12.24.0"
     },
     "runtime": {
       "name": "node",
-      "version": "^26.13.0"
+      "version": "^26.13.1"
     }
   }
 }

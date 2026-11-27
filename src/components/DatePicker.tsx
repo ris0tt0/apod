@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
-import type { DateParams } from '../apod';
+import type { DateParams } from '../pages/apod';
 import { getISOToday } from '../utils';
 
 export default function DatePicker() {
