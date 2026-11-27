@@ -1,27 +1,37 @@
-import { enUS } from 'date-fns/locale';
-import { format, isValid, parse } from 'date-fns';
+import Logger from 'js-logger';
 
-export const formatFeedDate = (date: Date) => {
-  const result = format(date, 'yyyy-MM-dd');
+export function isValidISODate(date: string) {
+  const regex = /^\d{4}-\d{2}-\d{2}$/;
 
-  return result;
-};
+  if (!regex.test(date)) return false;
+  const [year, month, day] = date.split('-').map(Number);
+  const dateObj = new Date(year, month - 1, day);
 
-export const getCurrentFormattedDate = () => {
+  // 4. Verify no calendar rollover occurred
+  return (
+    dateObj.getFullYear() === year &&
+    dateObj.getMonth() === month - 1 &&
+    dateObj.getDate() === day
+  );
+}
+
+export function getISOToday() {
   const date = new Date();
 
-  const result = formatFeedDate(date);
+  return `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+}
 
-  return result;
-};
+const isoDateRegex = /^\d{4}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12]\d|3[01])$/;
 
-export const formatFeedDateString = (date: string = '') => {
-  const parsedDate = parse(date, 'yyyy-MM-dd', new Date(), { locale: enUS });
-  const isValidDate = isValid(parsedDate);
+export function getApiDateString(date: string) {
+  if (isoDateRegex.test(date)) {
+    const removeDash = date.replaceAll('-', '');
+    const result = removeDash.slice(2);
 
-  if (!isValidDate) {
+    return result;
+  } else {
+    Logger.warn('getApiDateString invalid date', date);
+
     return null;
   }
-
-  return parsedDate;
-};
+}
